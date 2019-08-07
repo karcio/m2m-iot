@@ -1,2 +1,6 @@
-[client]
-host = localhost
+[DB]
+user = 
+password = 
+host = 
+port = 
+database = 

@@ -1,7 +1,57 @@
 import paho.mqtt.subscribe as subscribe
-import time
+from datetime import datetime
+import psycopg2
+from config import configuration
+import logging
+import argparse
 
-while True:
-    msg = subscribe.simple("test/topic", hostname="localhost")
-    print(msg.topic+" "+str(msg.payload))
-    time.sleep(5)
+parser = argparse.ArgumentParser()
+parser.add_argument("topic", help="insert topic you want to subscribe")
+parser.add_argument("host", help="insert hostname you want to subscribe")
+args = parser.parse_args()
+
+logging.basicConfig(
+    format=' %(levelname)s - %(asctime)s - %(message)s ', level=logging.INFO)
+
+
+class Readings(object):
+
+    def currentTime(self):
+
+        return datetime.now().isoformat()
+
+    def connectionToDb(self, payload, topic):
+        connection = psycopg2.connect(user=configuration().getDbUser(),
+                                      password=configuration().getDbPassword(),
+                                      host=configuration().getDbHost(),
+                                      port=configuration().getDbPort(),
+                                      database=configuration().getDbDatabase())
+        cursor = connection.cursor()
+
+        if args.topic == "home/kitchen/bmp085/temp":
+            cursor.execute("INSERT INTO readings (temperature, pressure, channel, lastupdate) VALUES ('" +
+                           payload+"',null,'"+topic+"','" + self.currentTime() + "');")
+        elif args.topic == "home/kitchen/bmp085/pres":
+            cursor.execute("INSERT INTO readings (temperature, pressure, channel, lastupdate) VALUES (null,'" +
+                           payload+"','"+topic+"','" + self.currentTime() + "');")
+
+        connection.commit()
+        cursor.close()
+        connection.close()
+        logging.info("Data %s inserted to database", payload)
+
+
+def subscribe(self):
+        while True:
+            msg = subscribe.simple(args.topic, hostname=args.host)
+            payload = msg.payload.decode("utf-8")
+            topic = msg.topic
+            self.connectionToDb(payload, topic)
+
+
+    def main(self):
+        self.subscribe()
+
+
+if __name__ == "__main__":
+    Readings().main()

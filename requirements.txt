@@ -1,1 +1,5 @@
 paho-mqtt
+psycopg2
+Adafruit_BMP
+configparser
+psycopg2
