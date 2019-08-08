@@ -40,14 +40,12 @@ class Readings(object):
         connection.close()
         logging.info("Data %s inserted to database", payload)
 
-
-def subscribe(self):
+    def subscribe(self):
         while True:
             msg = subscribe.simple(args.topic, hostname=args.host)
             payload = msg.payload.decode("utf-8")
             topic = msg.topic
             self.connectionToDb(payload, topic)
-
 
     def main(self):
         self.subscribe()

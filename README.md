@@ -80,6 +80,6 @@ sudo python publish.py home/kitchen/bmp085/pres pres
 # Subscribe
 
 ```
-python subscribe.py home/kitchen/bmp085/temp 192.168.178.25
-python subscribe.py home/kitchen/bmp085/pres 192.168.178.25
+python subscribe.py home/kitchen/bmp085/temp hostname
+python subscribe.py home/kitchen/bmp085/pres hostname
 ```
