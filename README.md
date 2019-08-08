@@ -1,4 +1,8 @@
-# m2m-iot
+# m2m-iot 0.1
+
+## python implementation for publish, subscribe (mqtt) and feed database with readings from supporting sensors like following:
+
+- BMP085
 
 1. Install mqtt, python dependencies and start mosquitto
 
@@ -38,6 +42,12 @@ pip install configparser
 ```
 pip install paho-mqtt
 pip install psycopg2
+```
+
+\*alternatively you can install all modules
+
+```
+pip install -r requirements.txt
 ```
 
 5. Install postgress database
