@@ -7,7 +7,7 @@ import argparse
 
 parser = argparse.ArgumentParser()
 parser.add_argument("topic", help="insert topic you want to publish")
-parser.add_argument("stream", help="insert strean you want to publish")
+parser.add_argument("stream", help="insert stream you want to publish")
 args = parser.parse_args()
 
 logging.basicConfig(

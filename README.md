@@ -102,6 +102,10 @@ mv config.template config
 ```
 sudo python publish.py home/kitchen/bmp085/temp temp
 sudo python publish.py home/kitchen/bmp085/pres pres
+
+python publish.py home/livingroom/bmp280/temp bmp280temp
+python publish.py home/livingroom/bmp280/pres bmp280pres
+
 ```
 
 # Subscribe
@@ -119,5 +123,5 @@ https://pypi.org/project/bmp280/
 cd m2m-iot
 source virtenv/bin/activate
 pip install bmp280
-pip install bmp280
+pip install smbus 
 ```
