@@ -7,6 +7,7 @@
    - BMP085
    - DHT11
    - DHT22
+   - BMP280 * in testing
 
 1. Install mqtt, python dependencies and start mosquitto
 
@@ -42,6 +43,7 @@ pip install Adafruit_BMP
 pip install Adafruit_DHT
 pip install configparser
 pip install wheel
+
 ```
 
 - subscribe.py
@@ -107,4 +109,15 @@ sudo python publish.py home/kitchen/bmp085/pres pres
 ```
 python subscribe.py home/kitchen/bmp085/temp hostname
 python subscribe.py home/kitchen/bmp085/pres hostname
+```
+
+
+# BMP280 
+https://pypi.org/project/bmp280/
+
+```
+cd m2m-iot
+source virtenv/bin/activate
+pip install bmp280
+pip install bmp280
 ```
