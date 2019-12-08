@@ -12,7 +12,7 @@ args = parser.parse_args()
 
 logging.basicConfig(
     format=' %(levelname)s - %(asctime)s - %(message)s ', level=logging.INFO)
-sensor = BMP085.BMP085()
+#sensor = BMP085.BMP085()
 
 mqttc = mqtt.Client()
 mqttc.connect("localhost")
