@@ -28,15 +28,23 @@ class Readings(object):
                                       database=configuration().getDbDatabase())
         cursor = connection.cursor()
 
-        if args.topic == "home/kitchen/bmp085/temp":
+        if args.topic == "kitchen/temp":
             cursor.execute("INSERT INTO readings (temperature, pressure, channel, lastupdate) VALUES ('" +
                            payload+"',null,'"+topic+"','" + self.currentTime() + "');")
-        elif args.topic == "home/kitchen/bmp085/pres":
+        elif args.topic == "kitchen/pres":
             cursor.execute("INSERT INTO readings (temperature, pressure, channel, lastupdate) VALUES (null,'" +
                            payload+"','"+topic+"','" + self.currentTime() + "');")
         elif args.topic == "livingroom/temp":
                 cursor.execute("INSERT INTO readings (temperature, pressure, channel, lastupdate) VALUES ('"+payload+"',null,'"+topic+"','" + self.currentTime() + "');")
         elif args.topic == "livingroom/pres":
+                cursor.execute("INSERT INTO readings (temperature, pressure, channel, lastupdate) VALUES (null,'"+payload+"','"+topic+"','" + self.currentTime() + "');")
+        elif args.topic == "bedroom1/temp":
+                cursor.execute("INSERT INTO readings (temperature, pressure, channel, lastupdate) VALUES ('"+payload+"',null,'"+topic+"','" + self.currentTime() + "');")
+        elif args.topic == "bedroom1/pres":
+                cursor.execute("INSERT INTO readings (temperature, pressure, channel, lastupdate) VALUES (null,'"+payload+"','"+topic+"','" + self.currentTime() + "');")
+        elif args.topic == "bedroom2/temp":
+                cursor.execute("INSERT INTO readings (temperature, pressure, channel, lastupdate) VALUES ('"+payload+"',null,'"+topic+"','" + self.currentTime() + "');")
+        elif args.topic == "bedroom2/pres":
                 cursor.execute("INSERT INTO readings (temperature, pressure, channel, lastupdate) VALUES (null,'"+payload+"','"+topic+"','" + self.currentTime() + "');")
 
 
