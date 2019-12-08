@@ -34,6 +34,11 @@ class Readings(object):
         elif args.topic == "home/kitchen/bmp085/pres":
             cursor.execute("INSERT INTO readings (temperature, pressure, channel, lastupdate) VALUES (null,'" +
                            payload+"','"+topic+"','" + self.currentTime() + "');")
+        elif args.topic == "livingroom/temp":
+                cursor.execute("INSERT INTO readings (temperature, pressure, channel, lastupdate) VALUES ('"+payload+"',null,'"+topic+"','" + self.currentTime() + "');")
+        elif args.topic == "livingroom/pres":
+                cursor.execute("INSERT INTO readings (temperature, pressure, channel, lastupdate) VALUES (null,'"+payload+"','"+topic+"','" + self.currentTime() + "');")
+
 
         connection.commit()
         cursor.close()
