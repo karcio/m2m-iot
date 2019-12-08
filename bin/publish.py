@@ -3,12 +3,6 @@ import time
 import Adafruit_BMP.BMP085 as BMP085
 import logging
 import argparse
-
-try:
-    from smbus2 import SMBus
-except ImportError:
-    from smbus import SMBus
-
 from gybmp280 import getReadings
 
 parser = argparse.ArgumentParser()
@@ -18,7 +12,7 @@ args = parser.parse_args()
 
 logging.basicConfig(
     format=' %(levelname)s - %(asctime)s - %(message)s ', level=logging.INFO)
-#sensor = BMP085.BMP085()
+sensor = BMP085.BMP085()
 
 mqttc = mqtt.Client()
 mqttc.connect("localhost")
@@ -31,7 +25,7 @@ class HomeSensors(object):
 
         return str(sensor.read_temperature())
 
-    def hum(self):
+    def pres(self):
 
         return str(sensor.read_pressure()/100)
 
