@@ -3,3 +3,5 @@ psycopg2
 Adafruit_BMP
 Adafruit_DHT
 configparser
+wheel
+smbus

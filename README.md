@@ -1,17 +1,19 @@
 # m2m-iot 0.1
 
-* Tested on raspberry pi 1 and 3 (should work on 2 as well), os raspbian "Raspbian Buster Lite" Version: July 2019
+* Tested on raspberry pi 1 and 3 (should work on 2 as well), os raspbian "Raspbian Buster Lite" Version: September 2019
 
 * Python implementation for publish, subscribe (mqtt) and feed database with readings from supporting sensors like following:
 
    - BMP085
-   - DHT11
-   - DHT22
-   - BMP280 * in testing
+   - DHT11 (in testing)
+   - DHT22 (in testing)
+   - BMP280 
 
 1. Install mqtt, python dependencies and start mosquitto
 
 ```
+sudo apt update -y 
+sudo apt upgrade -y 
 sudo apt-get -y install mosquitto git python3-dev vim
 sudo systemctl start mosquitto.service
 sudo systemctl enable mosquitto.service
@@ -33,28 +35,6 @@ source virtenv/bin/activate
 ```
 
 4. install python modules for
-
-- publish.py
-
-```
-pip install paho-mqtt
-pip install psycopg2
-pip install Adafruit_BMP
-pip install Adafruit_DHT
-pip install configparser
-pip install wheel
-
-```
-
-- subscribe.py
-
-```
-pip install paho-mqtt
-pip install psycopg2
-```
-
-\*alternatively you can install all modules
-
 ```
 pip install -r requirements.txt
 ```
@@ -100,28 +80,13 @@ mv config.template config
 # Publish
 
 ```
-sudo python publish.py home/kitchen/bmp085/temp temp
-sudo python publish.py home/kitchen/bmp085/pres pres
-
-python publish.py home/livingroom/bmp280/temp bmp280temp
-python publish.py home/livingroom/bmp280/pres bmp280pres
-
+python publish.py kitchen/temp temp -> for temperature
+python publish.py kitchen/pres pres -> for pressure
 ```
 
 # Subscribe
 
 ```
-python subscribe.py home/kitchen/bmp085/temp hostname
-python subscribe.py home/kitchen/bmp085/pres hostname
-```
-
-
-# BMP280 
-https://pypi.org/project/bmp280/
-
-```
-cd m2m-iot
-source virtenv/bin/activate
-pip install bmp280
-pip install smbus 
+python subscribe.py kitchen/temp hostname
+python subscribe.py kitchen/pres hostname
 ```
