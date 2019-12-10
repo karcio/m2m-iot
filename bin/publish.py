@@ -1,9 +1,9 @@
 import paho.mqtt.client as mqtt
 import time
-import Adafruit_BMP.BMP085 as BMP085
 import logging
 import argparse
 from gybmp280 import getReadings
+from bmp085 import getBmp085Readings
 
 parser = argparse.ArgumentParser()
 parser.add_argument("topic", help="insert topic you want to publish")
@@ -12,7 +12,6 @@ args = parser.parse_args()
 
 logging.basicConfig(
     format=' %(levelname)s - %(asctime)s - %(message)s ', level=logging.INFO)
-#sensor = BMP085.BMP085()
 
 mqttc = mqtt.Client()
 mqttc.connect("localhost")
@@ -41,15 +40,17 @@ class HomeSensors(object):
                 mqttc.publish(args.topic, float(list[1]), qos=2)
                 logging.info("sending data %s to %s ", list[1], args.topic)
             
-            elif args.stream == "temp":
-                mqttc.publish(args.topic, float(self.temp()), qos=2)
+            elif args.stream == "bmp085-temp":
+                list = getBmp085Readings()
+                mqttc.publish(args.topic, float(list[0]), qos=2)
                 logging.info("sending data %s to %s ",
-                             float(self.temp()), args.topic)
+                             float(list[0]), args.topic)
 
-            elif args.stream == "press":
-                mqttc.publish(args.topic, float(self.press()), qos=2)
+            elif args.stream == "bmp085-pres":
+                list = getBmp085Readings()
+                mqttc.publish(args.topic, float(list[1]), qos=2)
                 logging.info("sending data %s to %s ",
-                             float(self.press()), args.topic)
+                             float(list[1]), args.topic)
            
             time.sleep(30)
 
