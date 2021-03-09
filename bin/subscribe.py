@@ -46,6 +46,11 @@ class Readings(object):
                 cursor.execute("INSERT INTO readings (temperature, pressure, channel, lastupdate) VALUES ('"+payload+"',null,'"+topic+"','" + self.currentTime() + "');")
         elif args.topic == "bedroom2/pres":
                 cursor.execute("INSERT INTO readings (temperature, pressure, channel, lastupdate) VALUES (null,'"+payload+"','"+topic+"','" + self.currentTime() + "');")
+        elif args.topic == "office/temp":
+                cursor.execute("INSERT INTO readings (temperature, pressure, channel, lastupdate) VALUES ('"+payload+"',null,'"+topic+"','" + self.currentTime() + "');")
+        elif args.topic == "office/pres":
+                cursor.execute("INSERT INTO readings (temperature, pressure, channel, lastupdate) VALUES (null,'"+payload+"','"+topic+"','" + self.currentTime() + "');")
+
 
 
         connection.commit()
@@ -55,10 +60,13 @@ class Readings(object):
 
     def subscribe(self):
         while True:
-            msg = subscribe.simple(args.topic, hostname=args.host)
-            payload = msg.payload.decode("utf-8")
-            topic = msg.topic
-            self.connectionToDb(payload, topic)
+            try:
+                msg = subscribe.simple(args.topic, hostname=args.host)
+                payload = msg.payload.decode("utf-8")
+                topic = msg.topic
+                self.connectionToDb(payload, topic)
+            except:
+                print("host does not exists - waiting...")
 
     def main(self):
         self.subscribe()
