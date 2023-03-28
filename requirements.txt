@@ -1,7 +1,9 @@
 paho-mqtt
 psycopg2
 Adafruit_BMP
-Adafruit_DHT
+RPi.GPIO
+adafruit-blinka
+adafruit-circuitpython-dht
 configparser
 wheel
 smbus

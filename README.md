@@ -3,12 +3,10 @@
 * Tested on raspberry pi 1 and 3 (should work on 2 as well), os: `2023-02-21-raspios-bullseye-armhf-lite.img`
 * Python3 implementation for publish, subscribe (mqtt) and feed database with readings from supporting sensors:
    - BMP085
-   - DHT11 (in testing)
-   - DHT22 (in testing)
-   - BMP280 
+   - DHT11    
+   - PIR sensor 
 
-
-1. setup your rpi 
+1. Setup your rpi 
 ```
 sudo raspi-config
 ```
@@ -24,7 +22,7 @@ sudo i2cdetect -y 0
 or 
 sudo i2cdetect -y 1
 ```
-2. add user to gpio group
+2. Add user to gpio group
 ```
 sudo usermod -a -G gpio $USER
 ```
@@ -58,8 +56,13 @@ cd m2m-iot
 python3 -m venv virtenv
 source virtenv/bin/activate
 ```
-9. install python modules for
-```x
+9. Install libgpiod2
+```
+sudo apt install libgpiod2
+```
+
+10. Install python modules for
+```
 pip install -r requirements.txt
 ```
 # Publish
@@ -67,7 +70,12 @@ pip install -r requirements.txt
 python bin/publish.py bmp085/weather/temperature temperature # for temperature
 
 python bin/publish.py bmp085/weather/pressure pressure # for pressure
+
+python bin/publish.py dht/weather/humidity humidity # for humidity
 ```
+
+**FOLOWING PART NEEDS TESTING**
+
 # Install and configure database
 1. Install postgress database (only for server)
 ```
