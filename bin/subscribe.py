@@ -35,23 +35,29 @@ class Readings(object):
             cursor.execute("INSERT INTO readings (temperature, pressure, channel, lastupdate) VALUES (null,'" +
                            payload+"','"+topic+"','" + self.currentTime() + "');")
         elif args.topic == "livingroom/temp":
-                cursor.execute("INSERT INTO readings (temperature, pressure, channel, lastupdate) VALUES ('"+payload+"',null,'"+topic+"','" + self.currentTime() + "');")
+            cursor.execute("INSERT INTO readings (temperature, pressure, channel, lastupdate) VALUES ('" +
+                           payload+"',null,'"+topic+"','" + self.currentTime() + "');")
         elif args.topic == "livingroom/pres":
-                cursor.execute("INSERT INTO readings (temperature, pressure, channel, lastupdate) VALUES (null,'"+payload+"','"+topic+"','" + self.currentTime() + "');")
+            cursor.execute("INSERT INTO readings (temperature, pressure, channel, lastupdate) VALUES (null,'" +
+                           payload+"','"+topic+"','" + self.currentTime() + "');")
         elif args.topic == "bedroom1/temp":
-                cursor.execute("INSERT INTO readings (temperature, pressure, channel, lastupdate) VALUES ('"+payload+"',null,'"+topic+"','" + self.currentTime() + "');")
+            cursor.execute("INSERT INTO readings (temperature, pressure, channel, lastupdate) VALUES ('" +
+                           payload+"',null,'"+topic+"','" + self.currentTime() + "');")
         elif args.topic == "bedroom1/pres":
-                cursor.execute("INSERT INTO readings (temperature, pressure, channel, lastupdate) VALUES (null,'"+payload+"','"+topic+"','" + self.currentTime() + "');")
+            cursor.execute("INSERT INTO readings (temperature, pressure, channel, lastupdate) VALUES (null,'" +
+                           payload+"','"+topic+"','" + self.currentTime() + "');")
         elif args.topic == "bedroom2/temp":
-                cursor.execute("INSERT INTO readings (temperature, pressure, channel, lastupdate) VALUES ('"+payload+"',null,'"+topic+"','" + self.currentTime() + "');")
+            cursor.execute("INSERT INTO readings (temperature, pressure, channel, lastupdate) VALUES ('" +
+                           payload+"',null,'"+topic+"','" + self.currentTime() + "');")
         elif args.topic == "bedroom2/pres":
-                cursor.execute("INSERT INTO readings (temperature, pressure, channel, lastupdate) VALUES (null,'"+payload+"','"+topic+"','" + self.currentTime() + "');")
+            cursor.execute("INSERT INTO readings (temperature, pressure, channel, lastupdate) VALUES (null,'" +
+                           payload+"','"+topic+"','" + self.currentTime() + "');")
         elif args.topic == "office/temp":
-                cursor.execute("INSERT INTO readings (temperature, pressure, channel, lastupdate) VALUES ('"+payload+"',null,'"+topic+"','" + self.currentTime() + "');")
+            cursor.execute("INSERT INTO readings (temperature, pressure, channel, lastupdate) VALUES ('" +
+                           payload+"',null,'"+topic+"','" + self.currentTime() + "');")
         elif args.topic == "office/pres":
-                cursor.execute("INSERT INTO readings (temperature, pressure, channel, lastupdate) VALUES (null,'"+payload+"','"+topic+"','" + self.currentTime() + "');")
-
-
+            cursor.execute("INSERT INTO readings (temperature, pressure, channel, lastupdate) VALUES (null,'" +
+                           payload+"','"+topic+"','" + self.currentTime() + "');")
 
         connection.commit()
         cursor.close()
