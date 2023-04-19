@@ -3,9 +3,11 @@ version 0.3.1
 --- 
 * Tested on raspberry pi 1 and 3 (should work on 2 as well), os: `2023-02-21-raspios-bullseye-armhf-lite.img`
 * Python3 implementation for publish, subscribe (mqtt) and feed database with readings from supporting sensors:
-   - BMP085
+   - BMP085, BMP280
    - DHT11    
-   - PIR sensor 
+   - AHT20
+   - PIR sensor
+   - BH1750 
 
 1. Setup your rpi 
    ```
@@ -76,11 +78,10 @@ version 0.3.1
 
 # Publish
 ```
-python bin/publish.py bmp085/weather/temperature temperature # for temperature
-
-python bin/publish.py bmp085/weather/pressure pressure # for pressure
-
-python bin/publish.py dht/weather/humidity humidity # for humidity
+python bin/publish.py celbridge/shed/temperature temperature 	# for temperature
+python bin/publish.py celbridge/shed/pressure pressure 		# for pressure
+python bin/publish.py celbridge/shed/humidity humidity 		# for humidity
+python bin/publish.py celbridge/shed/light light 		# for light
 ```
 
 # Install and configure database

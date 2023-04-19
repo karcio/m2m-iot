@@ -7,3 +7,7 @@ adafruit-circuitpython-dht
 configparser
 wheel
 smbus
+adafruit-circuitpython-ahtx0
+adafruit-circuitpython-bmp280
+adafruit-circuitpython-sgp30
+gpiozero

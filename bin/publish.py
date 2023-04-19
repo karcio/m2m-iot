@@ -2,8 +2,9 @@ import paho.mqtt.client as mqtt
 import time
 import logging
 import argparse
-from bmp085 import getBmp085Readings
-from dht11 import getDHT11Humidity
+from bmp280 import getTempAndPressure
+from aht20 import getHumidity
+from lightSensor import readLight
 
 
 parser = argparse.ArgumentParser()
@@ -27,30 +28,42 @@ class HomeSensors(object):
         while True:
             if args.stream == "temperature":
                 try:
-                    list = getBmp085Readings()
+                    list = getTempAndPressure()
                     mqttc.publish(args.topic, float(list[0]), qos=2)
                     logging.info("sending data: %s - %s with topic: %s ",
                                  float(list[0]), args.stream, args.topic)
                 except:
-                    logging.error('wrong reading from sensor DHT11')
+                    logging.error('wrong reading from sensor')
+
 
             elif args.stream == "pressure":
                 try:
-                    list = getBmp085Readings()
+                    list = getTempAndPressure()
                     mqttc.publish(args.topic, float(list[1]), qos=2)
                     logging.info("sending data: %s - %s with topic %s ",
                                  float(list[1]), args.stream, args.topic)
                 except:
-                    logging.error('wrong reading from sensor DHT11')
+                    logging.error('wrong reading from sensor')
+
 
             elif args.stream == "humidity":
                 try:
-                    list = getDHT11Humidity()
+                    list = getHumidity()
                     mqttc.publish(args.topic, list, qos=2)
                     logging.info("sending data: %s - %s with topic: %s ",
                                  list, args.stream, args.topic)
                 except:
-                    logging.error('wrong reading from sensor DHT11')
+                    logging.error('wrong reading from sensor')
+
+
+            elif args.stream == "light":
+                try:
+                    list = readLight()
+                    mqttc.publish(args.topic, list, qos=2)
+                    logging.info("sending data: %s - %s with topic: %s ",
+                                 list, args.stream, args.topic)
+                except:
+                    logging.error('wrong reading from sensor')
 
             time.sleep(30)
 
