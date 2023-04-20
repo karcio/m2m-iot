@@ -35,7 +35,6 @@ class HomeSensors(object):
                 except:
                     logging.error('wrong reading from sensor')
 
-
             elif args.stream == "pressure":
                 try:
                     list = getTempAndPressure()
@@ -45,7 +44,6 @@ class HomeSensors(object):
                 except:
                     logging.error('wrong reading from sensor')
 
-
             elif args.stream == "humidity":
                 try:
                     list = getHumidity()
@@ -54,7 +52,6 @@ class HomeSensors(object):
                                  list, args.stream, args.topic)
                 except:
                     logging.error('wrong reading from sensor')
-
 
             elif args.stream == "light":
                 try:
