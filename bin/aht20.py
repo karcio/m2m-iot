@@ -6,7 +6,7 @@ def getHumidity():
     i2c = board.I2C()
     sensor = adafruit_ahtx0.AHTx0(i2c)
 
-    return sensor.relative_humidity
+    return round(sensor.relative_humidity, 0)
 
 
 def main():
