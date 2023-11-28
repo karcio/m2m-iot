@@ -11,53 +11,64 @@ parser.add_argument("host", help="insert hostname you want to subscribe")
 args = parser.parse_args()
 
 logging.basicConfig(
-    format=' %(levelname)s - %(asctime)s - %(message)s ', level=logging.INFO)
+    format=" %(levelname)s - %(asctime)s - %(message)s ", level=logging.INFO
+)
 
 
 class Readings(object):
-
     def currentTime(self):
-
         return datetime.now().isoformat()
 
     def connectionToDb(self, payload, topic):
-        connection = psycopg2.connect(user=configuration().getDbUser(),
-                                      password=configuration().getDbPassword(),
-                                      host=configuration().getDbHost(),
-                                      port=configuration().getDbPort(),
-                                      database=configuration().getDbDatabase())
+        connection = psycopg2.connect(
+            user="",
+            password="",
+            host="",
+            port="",
+            database="",
+        )
         cursor = connection.cursor()
 
-        if args.topic == "kitchen/temp":
-            cursor.execute("INSERT INTO readings (temperature, pressure, channel, lastupdate) VALUES ('" +
-                           payload+"',null,'"+topic+"','" + self.currentTime() + "');")
-        elif args.topic == "kitchen/pres":
-            cursor.execute("INSERT INTO readings (temperature, pressure, channel, lastupdate) VALUES (null,'" +
-                           payload+"','"+topic+"','" + self.currentTime() + "');")
-        elif args.topic == "livingroom/temp":
-            cursor.execute("INSERT INTO readings (temperature, pressure, channel, lastupdate) VALUES ('" +
-                           payload+"',null,'"+topic+"','" + self.currentTime() + "');")
-        elif args.topic == "livingroom/pres":
-            cursor.execute("INSERT INTO readings (temperature, pressure, channel, lastupdate) VALUES (null,'" +
-                           payload+"','"+topic+"','" + self.currentTime() + "');")
-        elif args.topic == "bedroom1/temp":
-            cursor.execute("INSERT INTO readings (temperature, pressure, channel, lastupdate) VALUES ('" +
-                           payload+"',null,'"+topic+"','" + self.currentTime() + "');")
-        elif args.topic == "bedroom1/pres":
-            cursor.execute("INSERT INTO readings (temperature, pressure, channel, lastupdate) VALUES (null,'" +
-                           payload+"','"+topic+"','" + self.currentTime() + "');")
-        elif args.topic == "bedroom2/temp":
-            cursor.execute("INSERT INTO readings (temperature, pressure, channel, lastupdate) VALUES ('" +
-                           payload+"',null,'"+topic+"','" + self.currentTime() + "');")
-        elif args.topic == "bedroom2/pres":
-            cursor.execute("INSERT INTO readings (temperature, pressure, channel, lastupdate) VALUES (null,'" +
-                           payload+"','"+topic+"','" + self.currentTime() + "');")
-        elif args.topic == "office/temp":
-            cursor.execute("INSERT INTO readings (temperature, pressure, channel, lastupdate) VALUES ('" +
-                           payload+"',null,'"+topic+"','" + self.currentTime() + "');")
-        elif args.topic == "office/pres":
-            cursor.execute("INSERT INTO readings (temperature, pressure, channel, lastupdate) VALUES (null,'" +
-                           payload+"','"+topic+"','" + self.currentTime() + "');")
+        if args.topic == "celbridge/shed/temperature":
+            cursor.execute(
+                "INSERT INTO readings (temperature, pressure, humidity, light, channel, lastupdate) VALUES ('"
+                + payload
+                + "', null, null, null, '"
+                + topic
+                + "', '"
+                + self.currentTime()
+                + "');"
+            )
+        elif args.topic == "celbridge/shed/pressure":
+            cursor.execute(
+                "INSERT INTO readings (temperature, pressure, humidity, light, channel, lastupdate) VALUES (null,'"
+                + payload
+                + "', null, null, '"
+                + topic
+                + "','"
+                + self.currentTime()
+                + "');"
+            )
+        elif args.topic == "celbridge/shed/humidity":
+            cursor.execute(
+                "INSERT INTO readings (temperature, pressure, humidity, light, channel, lastupdate) VALUES (null,null, '"
+                + payload
+                + "', null, '"
+                + topic
+                + "','"
+                + self.currentTime()
+                + "');"
+            )
+        elif args.topic == "celbridge/shed/light":
+            cursor.execute(
+                "INSERT INTO readings (temperature, pressure, humidity, light, channel, lastupdate) VALUES (null,null,null,'"
+                + payload
+                + "','"
+                + topic
+                + "','"
+                + self.currentTime()
+                + "');"
+            )
 
         connection.commit()
         cursor.close()
@@ -67,7 +78,7 @@ class Readings(object):
     def subscribe(self):
         while True:
             try:
-                msg = subscribe.simple(args.topic, hostname=args.host)
+                msg = subscribe.simple(args.topic, hostname="")
                 payload = msg.payload.decode("utf-8")
                 topic = msg.topic
                 self.connectionToDb(payload, topic)

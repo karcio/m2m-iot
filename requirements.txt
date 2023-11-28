@@ -1,5 +1,5 @@
 paho-mqtt
-psycopg2
+#psycopg2
 Adafruit_BMP
 RPi.GPIO
 adafruit-blinka
@@ -11,3 +11,4 @@ adafruit-circuitpython-ahtx0
 adafruit-circuitpython-bmp280
 adafruit-circuitpython-sgp30
 gpiozero
+psycopg2-binary
