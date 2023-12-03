@@ -72,9 +72,9 @@ def getTempAndPressure():
 
 def main():
     filtered_temp, filtered_pressure = getTempAndPressure()
-    # print(
-    #     f"Average Filtered Temperature: {filtered_temp} °C | Average Filtered Pressure: {filtered_pressure} hPa"
-    # )
+    print(
+        f"Average Filtered Temperature: {filtered_temp} °C | Average Filtered Pressure: {filtered_pressure} hPa"
+    )
 
 
 if __name__ == "__main__":

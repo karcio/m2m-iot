@@ -50,7 +50,7 @@ def getHumidity():
 
 def main():
     filtered_humidity = getHumidity()
-    # print(f"Average Filtered Humidity: {filtered_humidity:.2f}%")
+    print(f"Average Filtered Humidity: {filtered_humidity:.2f}%")
 
 
 if __name__ == "__main__":
