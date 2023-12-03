@@ -2,9 +2,15 @@ import paho.mqtt.client as mqtt
 import time
 import logging
 import argparse
-from bmp280 import getTempAndPressure
-from aht20 import getHumidity
-from lightSensor import readLight
+
+# from bmp280 import getTempAndPressure
+from bmp280_k import getTempAndPressure
+
+# from aht20 import getHumidity
+from aht20_k import getHumidity
+
+# from lightSensor import readLight
+from lightSensor_k import readLight
 
 
 parser = argparse.ArgumentParser()
