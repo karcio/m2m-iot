@@ -40,29 +40,41 @@ def getTempAndPressure():
     i2c = board.I2C()
     sensor = adafruit_bmp280.Adafruit_BMP280_I2C(i2c)
 
-    temperature_measurement = round(sensor.temperature, 1)
-    pressure_measurement = round(sensor.pressure, 0)
+    num_measurements = 10
+    temp_sum = 0
+    pressure_sum = 0
 
-    # Apply Kalman filter for temperature
-    global x_hat_temp, P_temp
-    x_hat_temp, P_temp = kalman_filter(
-        temperature_measurement, x_hat_temp, P_temp, Q_temp, R_temp
-    )
+    for _ in range(num_measurements):
+        temperature_measurement = round(sensor.temperature, 1)
+        pressure_measurement = round(sensor.pressure, 0)
 
-    # Apply Kalman filter for pressure
-    global x_hat_pressure, P_pressure
-    x_hat_pressure, P_pressure = kalman_filter(
-        pressure_measurement, x_hat_pressure, P_pressure, Q_pressure, R_pressure
-    )
+        # Apply Kalman filter for temperature
+        global x_hat_temp, P_temp
+        x_hat_temp, P_temp = kalman_filter(
+            temperature_measurement, x_hat_temp, P_temp, Q_temp, R_temp
+        )
 
-    return x_hat_temp, x_hat_pressure
+        # Apply Kalman filter for pressure
+        global x_hat_pressure, P_pressure
+        x_hat_pressure, P_pressure = kalman_filter(
+            pressure_measurement, x_hat_pressure, P_pressure, Q_pressure, R_pressure
+        )
+
+        temp_sum += x_hat_temp
+        pressure_sum += x_hat_pressure
+
+    # Calculate the average of filtered values
+    avg_temp = temp_sum / num_measurements
+    avg_pressure = pressure_sum / num_measurements
+
+    return round(avg_temp, 1), round(avg_pressure, 1)
 
 
 def main():
-    for _ in range(10):
-        temp, pressure = getTempAndPressure()
-
-        print(f"Filtered Temperature: {temp} °C | Filtered Pressure: {pressure} hPa")
+    filtered_temp, filtered_pressure = getTempAndPressure()
+    # print(
+    #     f"Average Filtered Temperature: {filtered_temp} °C | Average Filtered Pressure: {filtered_pressure} hPa"
+    # )
 
 
 if __name__ == "__main__":

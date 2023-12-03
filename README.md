@@ -150,5 +150,10 @@ python bin/subscribe.py celbridge/shed/temperature hostname
 python bin/subscribe.py celbridge/shed/pressure hostname
 python bin/subscribe.py celbridge/shed/humidity hostname
 python bin/subscribe.py celbridge/shed/light hostname
+```
 
+# Kalman filter dependencies
+
+```
+sudo apt-get install libopenblas-dev
 ```
