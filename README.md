@@ -115,11 +115,11 @@ python bin/publish.py celbridge/shed/light light 		         # for light
 3. Create database table and add user permissions to table (only for server)
 
    ```
-   CREATE DATABASE weatherdb;
+   CREATE DATABASE localweatherdb;
    CREATE USER dbuser;
    ALTER USER dbuser WITH ENCRYPTED PASSWORD 'pa88w0rd';
-   ALTER DATABASE weatherdb OWNER TO dbuser;
-   \c weatherdb;
+   ALTER DATABASE localweatherdb OWNER TO dbuser;
+   \c localweatherdb;
    DROP TABLE readings;
    CREATE TABLE readings(
       id serial PRIMARY KEY,
@@ -132,7 +132,7 @@ python bin/publish.py celbridge/shed/light light 		         # for light
       );
    GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO dbuser;
    GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public to dbuser;
-   GRANT ALL PRIVILEGES ON DATABASE weatherdb TO dbuser;
+   GRANT ALL PRIVILEGES ON DATABASE localweatherdb TO dbuser;
    ```
 
 4. Update config file (only for server)
