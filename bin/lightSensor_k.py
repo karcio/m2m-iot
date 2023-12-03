@@ -49,7 +49,7 @@ def readLight(addr=DEVICE):
     # Apply Kalman filter
     filtered_light = kalman_filter(light_measurement)
 
-    return filtered_light
+    return round(filtered_light, 1)
 
 
 def main():
